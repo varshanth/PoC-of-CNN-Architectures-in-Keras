@@ -5,8 +5,8 @@ Description:
     Display Model Summaries & Visualizations for Implemented Architectures
 '''
 
-from Agg_ResNet import agg_res_net
-from DenseNet import dense_net
+from Agg_Res_Net import agg_res_net
+from Dense_Net import dense_net
 
 if __name__ == '__main__':
     _arch_fn = {
