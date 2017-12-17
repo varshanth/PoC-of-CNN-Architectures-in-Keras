@@ -1,17 +1,21 @@
-# Aggregated Residual Network
+# Deep Learning Projects
 
-### Based on: Aggregated Residual Transformations for Deep Neural Networks by Xie et al.  
+## 1. Aggregated Residual Networks
+- Implemented as POC for CIFAR10 and CIFAR100 datasets i.e. not tuned to provide max accuracy  
+- Based on:  
+Aggregated Residual Transformations for Deep Neural Networks by Xie et al.  
 https://arxiv.org/abs/1611.05431
-### Proof of Concept: Blocks of Aggregated Residual Transformations  
-### Contains  
-- APIs for Aggregated Residual Layers
-- Sample Aggregated Residual Network: Used for testing on CIFAR10 and CIFAR100 datasets
 
-# Densely Connected CNN
+## 2. Dense Networks  
+- Implemented as POC for CIFAR10 and CIFAR100 datasets i.e. not tuned to provide max accuracy  
+- Based on:  
+Densely Connected Convolutional Networks by Huang et al.  
+https://arxiv.org/abs/1608.06993  
 
-### Based on: Densely Connected Convolutional Networks by Huang et al.
-https://arxiv.org/abs/1608.06993
-### Proof of Concept: Blocks of Dense Layers  
-### Contains  
-- APIs for Dense Layers
-- Sample Dense Network: Used for testing on CIFAR10 and CIFAR100 datasets
+## 3. Spore Network
+## 4. Cherry Network  
+  
+Based on:
+SporeNet and CherryNet: Fusion Variants of Aggregated Residual Networks and Densely Connected Networks  
+  
+Will be uploaded once the results of the paper submission are released

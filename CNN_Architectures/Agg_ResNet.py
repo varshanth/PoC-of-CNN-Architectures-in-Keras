@@ -1,3 +1,9 @@
+'''
+File: Agg_ResNet.py
+Title: Aggregated Residual Transformations Network
+Description: Proof-of-Concept implementation of Aggregated Residual Network
+'''
+
 from keras.layers import Conv2D, Dense
 from keras.layers.pooling import GlobalAveragePooling2D
 from keras.models import Model
