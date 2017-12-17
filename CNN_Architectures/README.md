@@ -1,4 +1,6 @@
-# Deep Learning Projects
+# CNN Architectures
+
+Implementation in Keras 
 
 ## 1. Aggregated Residual Networks
 - Implemented as POC for CIFAR10 and CIFAR100 datasets i.e. not tuned to provide max accuracy  
