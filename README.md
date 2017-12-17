@@ -9,7 +9,7 @@ https://arxiv.org/abs/1611.05431
 ## 2. Dense Networks  
   
 Based on:
-Densely Connected Convolutional Networks by Huang et al.
+Densely Connected Convolutional Networks by Huang et al.  
 https://arxiv.org/abs/1608.06993  
 
 ## 3. Spore Network
