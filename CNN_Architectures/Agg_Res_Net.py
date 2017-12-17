@@ -1,5 +1,5 @@
 '''
-File: Agg_ResNet.py
+File: Agg_Res_Net.py
 Title: Aggregated Residual Transformations Network
 Description: Proof-of-Concept implementation of Aggregated Residual Network
 '''

@@ -1,5 +1,5 @@
 '''
-File: DenseNet.py
+File: Dense_Net.py
 Title: Densely Connected CNN
 Description: Proof-of-Concept implementation of DenseNet
 '''
