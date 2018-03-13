@@ -1,4 +1,4 @@
-# 1. CNN Architectures
+# CNN Architectures
 
 Implementation in Keras 
 
