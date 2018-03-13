@@ -9,7 +9,7 @@ from keras.layers.pooling import GlobalAveragePooling2D
 from keras.models import Model
 from keras.utils.vis_utils import plot_model
 from ArchLayers import (_preactivation_layers, _create_input_layer,
-        _agg_res_layer, _dense_layer, _dense_transition)
+        _dense_layer, _dense_transition)
 
 
 def dense_net(_input_shape, _n_classes):

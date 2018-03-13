@@ -101,7 +101,7 @@ def _dense_transition(input_layer, d_in, d_out):
     input_layer = _preactivation_layers(input_layer)
     # ID_IN
     compress_in = Conv2D(d_out, kernel_size=(1,1), padding='same')(input_layer)
-    # AVERAGE_POOL
+    # MAX_POOL
     pool_out = MaxPooling2D(pool_size=(2,2), strides=(2,2))(compress_in)
     return pool_out
 
