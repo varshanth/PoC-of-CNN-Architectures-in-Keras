@@ -13,5 +13,5 @@
 ### 1. Facial Expression Recognition: Video Classification using CNN to RNN Pipeline
 In Progress  
 
-### 2. Music Emotion Recognition: LRCN to Audio Spectrograms
+### 2. Music Emotion Recognition: Classification of Audio Spectrograms using LRCN
 To Do
