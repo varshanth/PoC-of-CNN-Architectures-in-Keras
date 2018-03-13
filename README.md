@@ -1,4 +1,4 @@
-# CNN Architectures
+# Proof of Concept of CNN Architectures in Keras
 
 Implementation in Keras 
 
