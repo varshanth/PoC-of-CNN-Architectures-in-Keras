@@ -1,4 +1,4 @@
-# Emotion-Based Therapies and Treatments for Improving Mental Well Being
+# Emotion Reciprocation for Improving Mental Well Being
 
 ## Description 
 Stress, anxiety, depression, anger and pressure are the emotional situations which most humans face when they are going through difficult times. Happiness, calmness, serenity, pleasure and excitement are occasions where humans benefit from since these emotional situations are associated with a positive mental health. During both these contrasting occasions, humans often seek to share their emotional state with others in a socially dynamic environment. This can be seen as a type of relationship between the subject and one or more characters. Research in psychology has shown that the presence of an external entity plays a vital role during emotional transitions, and subjects in relationships which involve reciprocation of emotional states, benefit the most with respect to how fast the subject converges to a positive mental state. Our project is inspired by the above and we present a novel system to aid in emotional state transition by reciprocating his/her emotional state through sensory based stimulation. A
