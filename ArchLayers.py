@@ -106,6 +106,50 @@ def _dense_transition(input_layer, d_in, d_out):
     return pool_out
 
 
+def _cherry_layer(input_layer, C, d_in, growth_rate, n_dense):
+    '''
+    ID_IN: 1x1 Conv bottleneck to d_in
+    SPLIT: Split d_in into C cardinal branches channel wise
+    DENSE: Perform Dense Layers with depth = growth rate on each branch
+    MERGE: Merge cardinal blocks channel wise
+    ID_EXPAND: Perform 1x1 Conv on input to d_out
+    SHORTCUT: Add residual connection
+    '''
+    print('Cherry Layer: d_in = {0}'.format(d_in))
+    # ID_IN
+    activ_in = _preactivation_layers(input_layer)
+    intermed = Conv2D(d_in, kernel_size=(1,1),
+                            padding="same")(activ_in)
+    channels_per_branch = d_in // C
+    c_blocks = []
+    new_depth = d_in
+    # SPLIT
+    for c_block in range(C):
+        d_in_per_branch = channels_per_branch
+        start_idx = c_block * channels_per_branch
+        end_idx = start_idx + channels_per_branch
+        branch_layer = Lambda(
+                lambda c_b: (c_b[:, :, :, start_idx:end_idx]
+                if K.image_data_format() == 'channels_last' else
+                c_b[:, start_idx:end_idx :, :,]))(intermed)
+        # DENSE
+        for dense_idx in range(n_dense):
+            print('Dense Layer IDX {0}'.format(dense_idx))
+            branch_layer = _dense_layer(branch_layer, d_in_per_branch,
+                                           growth_rate,
+                                           d_in_per_branch + growth_rate)
+            d_in_per_branch += growth_rate
+            new_depth += growth_rate
+        c_blocks.append(branch_layer)
+    # MERGE
+    intermed = concatenate(c_blocks, axis = _channel_axis)
+    # ID_EXPAND
+    id_expand = Conv2D(new_depth, kernel_size=(1,1), padding='same')(activ_in)
+    # SHORTCUT
+    resid_out = add([intermed, id_expand])
+    return resid_out
+
+
 if __name__ == '__main__':
     print('CNN Architecture Layers Library')
 
