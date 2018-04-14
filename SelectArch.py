@@ -7,13 +7,17 @@ Description:
 
 from Agg_Res_Net import agg_res_net
 from Dense_Net import dense_net
+from Spore_Net import spore_net
+from Cherry_Net import cherry_net
 
 if __name__ == '__main__':
     _arch_fn = {
-            0:agg_res_net,
-            1:dense_net
+            0: agg_res_net,
+            1: dense_net,
+            2: spore_net,
+            3: cherry_net
             }
-    selec_display = '0: Agg Res Net 1: Dense Net'
+    selec_display = '0: Agg Res Net 1: Dense Net 2: Spore Net 3: Cherry Net'
 
     arch = int(input(
             '''
