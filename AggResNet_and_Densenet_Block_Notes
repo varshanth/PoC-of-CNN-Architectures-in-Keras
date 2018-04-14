@@ -1,0 +1,84 @@
+Aggregated Residual Transformations:
+***********************************
+
+- ResNets, VGGNets, etc imply depth is an essential dimension
+- All recent architectures - too much hyperparameters to tune
+- Inception modules - Split, transform and merge (STM) strategy
+- Solution space of split, transform, merge strategy is a strict subspace of a
+  single large layer.
+- STM - lower computational complexity but still represents the power of larger
+  or dense layers
+- Inception modules - heterogeneous convolution paths and tailor made for each
+  individual transformation which makes it unclear how to adapt the inception
+  architecture to new dataset/tasks.
+- AggResTrans - STM with homogeneous convolution paths, hence requires minimal
+  effort when extending to new tasks / datasets. The input is split equally
+  depthwise into a number of similar branches defined by *cardinality*
+                                                          ***********
+- Merge is done depthwise and finally a shortcut is added to the merged output
+  for the network to learn how much of the input distribution is required to
+  propagate the error backward 
+- Compressed convolutions reduces redundancy and the complexity of the model
+- The individual branches are trained independently and not jointly, hence it
+  cannot be viewed as an ensemble like resnets which are additive
+- Downsampling is performed by having the 3x3 convolution with stride 2 during
+  the beginning transformation in each AggResNet block
+- 2 modes
+  a) Bottleneck - to each branch input d1 goes in, the 1x1 performs the
+    the compression to d2, then goes through the 3x3 and then expansion in
+    the 1x1 to d1
+  b) Uniform - d1 goes in, 1x1 performs an identity mapping to d1, then 3x3,
+    then an identity mapping 1x1 to d1
+- Accuracy increases not because the architecture induces a form of
+  regularization but rather a more stronger representation
+- With complexity preserved, increasing cardinality at the price of reducing
+  width (channel depth) starts to show saturating accuracy gains when the
+  bottleneck width is small i.e d2. It is not worthwhile to keep reducing
+  width in such a trade-off. So they adopt a bottleneck width no smaller than
+  d1/4.
+- As d1 -> d2 compression increases, C should increase
+
+AggResBlock:
+    
+                   |- d2/C - 3x3xd2/C - 1x1xd1/C -|
+    d1 -> 1x1xd2 ->|- d2/C - 3x3xd2/C - 1x1xd1/C -|- d1--> + ---> d1
+     |             . . . . . . . . . . . . . . . .         ^
+     |             |- d2/C - 3x3xd2/C - 1x1xd1/C -|        |
+     |-----------------------------------------------------|
+     
+
+Densely Connected Convolutional Networks:
+*****************************************
+- ResNets, Highway Nets etc create shortcut paths from early layers to later
+  layers to address the vanishing gradient problem
+- Densenet ensures that each layer is available to all the future layers
+- Operates on the basis of a dense compression convolution i.e
+  d1 -> 1x1 -> 3x3 -> d2 -> concat -> d1+d2                 where d2 <<< d1
+  |---------------------------^
+  
+- Here d2 is called the ***growth rate***
+                           ***********
+- In an L layered network, the output of layer l is concatenated to all L-l
+  future layers hence creating L(L+1)/2 connections in the network
+- Unlike resnets, which aims to "preserve" information through shortcuts,
+  densenet adds a small set of feature maps to the collective knowledge of the
+  network
+- Stochastic depth (randomly dropping layers) works as regularization for
+  resnets but not for densenets
+- Dense concatenations encourages reuse of features
+- Transition layer consists of a 1x1 identity mapping with an optional
+  hyperparameter called **compression factor** to decrease the feature maps
+                          ******************
+  going into the next dense block and a pooling layer which does downsampling
+  nxnxd1-> 1x1 x c.f * d1 -> pooling -> n/2 x n/2 x c.f * d1
+- The denseblock consists of a bottleneck layer to reduce the complexity before
+  it feeds the input to the 3x3 convolution
+- Empirically proven that prior layers are used later by observing that the
+  weights assigned to the feature maps of the earlier layers are non zero
+  
+  
+  
+Both networks use the Global Average Pooling instead of the traditional FC
+network as a form of regularization to avoid overfitting. GAP is also used
+to create a more direct spatial relation between the output of the convolution
+layers and the probability of the predicted class (softmax output).
